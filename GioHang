@@ -1,0 +1,89 @@
+#include<iostream>
+#include<vector>
+#include<iomanip>
+using namespace std;
+
+class MatHang
+{
+protected:
+    string newID;
+    string ID;
+    string name;
+    float cost;
+public:
+    void input();
+    void output();
+};
+class GioHang: public MatHang{
+    private:
+        vector <MatHang> list_MatHang; 
+    public:
+        void input();
+        void output();
+        int Timkiem_Mathang();
+         void TimMatHang();
+};
+void GioHang::TimMatHang(){
+    cout<<"Nhap ID cua mat hang can xoa: ";
+    getline(cin,newID);
+    for(int i=0; i< list_MatHang.size();i++){
+        if(newID==list_MatHang[i].ID){
+            cout<<"mat hang co trong mang";
+        }
+    }
+
+    
+}
+
+void GioHang::input(){
+     while(true){
+         system("cls");// xoa cac tat moi thu truoc cau lenh nak
+         cout<<setfill('*')<<setw(20)<<"Information"<<setw(30);
+         cout<<"\n1.  Chon Mat Hang"<<endl;
+         cout<<"2. Thoat"<< endl;
+         int luachon;
+         cout<<"Lua chon cua Ban La: ";
+         cin>>luachon;
+         if(luachon==1){
+              MatHang Mathang1 ;
+        Mathang1.input();
+        list_MatHang.push_back(Mathang1);
+
+         }
+         else if( luachon==0) {
+            break;
+        }
+        else{
+            cout<<"KO hop le!!! Xin Nhap Lai:";
+            system("pause"); // dung man hinh lai
+        }
+    
+}}
+void GioHang::output(){
+    for(int i=0;i<list_MatHang.size();i++){
+        cout<<"Thong tin cua Mat hang thu: "<<i+1<<endl;
+        list_MatHang[i].output();
+    }
+}
+void MatHang::input(){
+    cin.ignore();
+    cout<<"Nhap ma ID: ";
+    getline(cin,ID);
+    cout<<"\n Nhap Name: ";
+    getline(cin,name);
+    cin.ignore();
+    cout<<" nhap Cost: ";
+    cin>>cost;
+
+}
+void MatHang::output(){
+    cout<<" ID: "<<ID<<" Name: "<<name<<" Cost: "<<cost;
+}
+int main(){
+    GioHang Giohang1;
+    Giohang1.input();
+    Giohang1.output();
+    Giohang1.TimMatHang();
+
+return 0;
+}
